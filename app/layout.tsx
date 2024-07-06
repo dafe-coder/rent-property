@@ -1,8 +1,8 @@
 import '@/assets/styles/globals.css'
 import { Metadata } from 'next'
 import { FC, PropsWithChildren } from 'react'
+import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-type Props = {}
 
 export const metadata: Metadata = {
 	title: 'Rent Property | Find The Perfect Rental',
@@ -15,7 +15,8 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
 		<html lang='eng'>
 			<body>
 				<Navbar />
-				<main>{children}</main>
+				<main className='min-h-[calc(100vh_-_9rem)]'>{children}</main>
+				<Footer />
 			</body>
 		</html>
 	)
