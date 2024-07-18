@@ -6,9 +6,8 @@ export const GET = async (request, { params }) => {
 	try {
 		await connectDB()
 		const res = await Property.findById(params.id)
-		console.log(res)
 		if (!res) return new Response('Property not Found', { status: 404 })
-		return new Response(res, {
+		return new Response(JSON.stringify(res), {
 			status: 200,
 		})
 	} catch (error) {
