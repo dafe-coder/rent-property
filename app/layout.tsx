@@ -1,4 +1,5 @@
 import '@/assets/styles/globals.css'
+import AuthProvider from '@/components/AuthProvider'
 import { Metadata } from 'next'
 import { FC, PropsWithChildren } from 'react'
 import Footer from '../components/Footer'
@@ -12,13 +13,15 @@ export const metadata: Metadata = {
 
 const MainLayout: FC<PropsWithChildren> = ({ children }) => {
 	return (
-		<html lang='eng'>
-			<body>
-				<Navbar />
-				<main className='min-h-[calc(100vh_-_9rem)]'>{children}</main>
-				<Footer />
-			</body>
-		</html>
+		<AuthProvider>
+			<html lang='eng'>
+				<body>
+					<Navbar />
+					<main className='min-h-[calc(100vh_-_9rem)]'>{children}</main>
+					<Footer />
+				</body>
+			</html>
+		</AuthProvider>
 	)
 }
 
