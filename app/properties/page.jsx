@@ -1,9 +1,7 @@
 import PropertyCard from '@/components/PropertyCard'
 import { fetchProperties } from '@/utils/requests'
-
 const Property = async () => {
 	const properties = await fetchProperties()
-
 	//sort properties by date
 	properties.length &&
 		properties.sort((a, b) => new Date(b.createAt) > new Date(a.createAt))
