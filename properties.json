@@ -39,7 +39,7 @@
 			"email": "john@gmail.com",
 			"phone": "617-555-5555"
 		},
-		"images": ["a1.jpg", "a2.jpg", "a3.jpg"],
+		"images": [],
 		"is_featured": false,
 		"createdAt": "2024-01-01T00:00:00.000Z",
 		"updatedAt": "2024-01-01T00:00:00.000Z"

@@ -1,3 +1,4 @@
+import cloudinary from '@/config/cloudinary'
 import connectDB from '@/config/database'
 import Property from '@/models/Property'
 import { getSessionUser } from '@/utils/getSessionUser'
@@ -62,7 +63,33 @@ export const POST = async request => {
 				phone: formData.get('seller_info.phone'),
 			},
 			owner: userId,
-			// images,
+		}
+
+		// upload images to cloudinary
+
+		const imageUploadPromises = []
+		for (const image of images) {
+			const imageBuffer = await image.arrayBuffer()
+			const imageArray = Array.from(new Uint8Array(imageBuffer))
+			const imageData = Buffer.from(imageArray)
+			console.log('image data  -  ', imageData)
+			// convert the image data to base64
+			const imageBase64 = imageData.toString('base64')
+			console.log(imageBase64)
+			// Make request to upload to cloudinary
+			const result = await cloudinary.uploader.upload(
+				`data:image/png;base64,${imageBase64}`,
+				{ folder: 'propertypulse' }
+			)
+			console.log('result -  ', result)
+			imageUploadPromises.push(result.secure_url)
+			console.log('imageUploadPromises  - ', imageUploadPromises)
+			// Wait for all images to upload
+
+			const uploadedImages = await Promise.all(imageUploadPromises)
+
+			// Add uploaded images to the property data object
+			propertyData.images = uploadedImages
 		}
 
 		const newProperty = new Property(propertyData)
@@ -74,6 +101,7 @@ export const POST = async request => {
 		// 	status: 200,
 		// })
 	} catch (error) {
+		console.log(error)
 		return new Response('Failed to add property!', {
 			status: 500,
 		})

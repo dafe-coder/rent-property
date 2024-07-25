@@ -1,10 +1,11 @@
 'use client'
+import PropertyDetails from '@/components/PropertyDetails'
+import PropertyHeaderImage from '@/components/PropertyHeaderImage'
+import PropertyImages from '@/components/PropertyImages'
 import { fetchProperty } from '@/utils/requests'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { FaArrowLeft, FaBookmark, FaPaperPlane, FaShare } from 'react-icons/fa'
-import PropertyDetails from '../../../components/PropertyDetails'
-import PropertyHeaderImage from '../../../components/PropertyHeaderImage'
 
 const PropertyId = ({ params }) => {
 	const [property, setProperty] = useState(null)
@@ -140,6 +141,7 @@ const PropertyId = ({ params }) => {
 							</div>
 						</div>
 					</section>
+					<PropertyImages images={property.images} />
 				</>
 			)}
 		</>
